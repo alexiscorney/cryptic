@@ -7,5 +7,18 @@
     <body>
         <h1>Solve em</h1>
         <p>Oh yeah baby!</p>
+
+        <div id="posts">
+            <p>Posts</p>
+            {% for post in posts %}
+            <div>
+                <p>published: {{ post.published_date }}</p>
+                <h2><a href="">{{ post.title }}</a></h2>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
+            {% endfor %}
+        </div>
     </body>
+
+
 </html>
