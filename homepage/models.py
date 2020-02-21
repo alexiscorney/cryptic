@@ -18,8 +18,12 @@ class Post(models.Model):
         return self.title
 
 class Clue(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     text = models.CharField(max_length=200)
     length = models.CharField(max_length=10)
 
     def __str__(self):
         return self.text
+    
+    def publish(self):
+        self.save()

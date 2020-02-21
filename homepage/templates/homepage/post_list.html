@@ -10,4 +10,11 @@
             <p>{{ post.text|linebreaksbr }}</p>
         </div>
     {% endfor %}
+    <h1>CLUES:</h1>
+    {% for clue in clues %}
+        <div class ="clue">
+            <h2><a href="{% url 'clue_detail' pk=clue.pk %}">{{ clue.text }}</a></h2>
+            <p>{{ clue.length|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
 {% endblock %}

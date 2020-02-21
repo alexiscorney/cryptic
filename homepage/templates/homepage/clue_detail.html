@@ -1,0 +1,11 @@
+{% extends 'homepage/base.html' %}
+
+{% block content %}
+    <div class="clue">
+        
+        <a class="btn btn-default" href="{% url 'clue_edit' pk=clue.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+
+        <h2>{{ clue.text }}</h2>
+        <p>{{ clue.length|linebreaksbr }}</p>
+    </div>
+{% endblock %}

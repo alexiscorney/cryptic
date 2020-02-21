@@ -9,7 +9,8 @@ from .forms import PostForm
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'homepage/post_list.html', {'posts':posts})
+    clues = Clue.objects.all()
+    return render(request, 'homepage/post_list.html', {'posts':posts, 'clues':clues})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -41,3 +42,32 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'homepage/post_edit.html', {'form': form})
+
+def clue_edit(request, pk):
+    clue = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = ClueForm(request.POST, instance=clue)
+        if form.is_valid():
+            clue = form.save(commit=False)
+            clue.author = request.user
+            clue.save()
+            return redirect('clue_detail', pk=clue.pk)
+    else:
+        form = ClueForm(instance=clue)
+    return render(request, 'homepage/clue_edit.html', {'form': form})
+
+def clue_detail(request, pk):
+    clue = get_object_or_404(Clue, pk=pk)
+    return render(request, 'homepage/clue_detail.html', {'clue': clue})
+
+def clue_new(request):
+    if request.method == "POST":
+        form = ClueForm(request.POST)
+        if form.is_valid():
+            clue = form.save(commit=False)
+            clue.author = request.user
+            clue.save()
+            return redirect('clue_detail', pk=clue.pk)
+    else:
+        form = ClueForm()
+    return render(request, 'homepage/clue_edit.html', {'form': form})
