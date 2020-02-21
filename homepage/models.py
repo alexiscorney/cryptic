@@ -16,3 +16,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Clue(models.Model):
+    text = models.CharField(max_length=200)
+    length = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.text

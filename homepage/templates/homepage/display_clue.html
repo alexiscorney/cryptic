@@ -1,0 +1,13 @@
+{% load static %}
+
+<head><link rel="stylesheet" href="{% static 'css/homepage.css' %}"></head>
+<body>
+    <h1>HI</h1>
+    {% block content %}
+            <h2>New post</h2>
+            <form method="POST" class="clue-form">{% csrf_token %}
+                {{ form }}
+                <button type="submit" class="save btn btn-default">Save</button>
+            </form>
+    {% endblock %}
+</body>

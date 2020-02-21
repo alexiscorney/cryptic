@@ -1,29 +1,13 @@
-{% load static %}
-<html>
+{% extends 'homepage/base.html' %}
 
-    <head>
-        <title>Solve those Cryptic Crosswords!</title>
-        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,700i|Source+Sans+Pro" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
-
-    </head>
-    
-
-    <body>
-        <h1>Solve em</h1>
-        <p>Oh yeah baby!</p>
-
-        <div id="posts">
-            <p>Posts</p>
-            {% for post in posts %}
-            <div>
-                <p>published: {{ post.published_date }}</p>
-                <h2><a href="">{{ post.title }}</a></h2>
-                <p>{{ post.text|linebreaksbr }}</p>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
             </div>
-            {% endfor %}
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-    </body>
-
-
-</html>
+    {% endfor %}
+{% endblock %}
