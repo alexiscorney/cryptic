@@ -22,7 +22,7 @@ class Clue(models.Model):
     text = models.CharField(max_length=200)
     length = models.CharField(max_length=10)
 
-    solutions = models.TextField()
+    solutions = models.TextField(default="UNSOLVED")
 
     def __str__(self):
         return self.text

@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 
-from axc680.cryptic.tools import pipeline as pipeline
+from crossword_solver import test as t
 
 
 def home(request):
@@ -53,9 +53,8 @@ def clue_edit(request, pk):
             clue = form.save(commit=False)
             clue.author = request.user
             
-
-            sol = pipeline.test()
-            clue.solution = sol
+            sol = t.test()
+            clue.solutions = sol
 
             clue.save()
             return redirect('clue_detail', pk=clue.pk)
@@ -73,6 +72,9 @@ def clue_new(request):
         if form.is_valid():
             clue = form.save(commit=False)
             clue.author = request.user
+
+            sol = t.test()
+            clue.solutions = sol
             clue.save()
             return redirect('clue_detail', pk=clue.pk)
     else:
