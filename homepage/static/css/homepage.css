@@ -13,3 +13,12 @@ p {
 body {
     padding-left: 20px;
 }
+
+.page-buttons {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.page-header {
+    padding-bottom: 10px;
+}

@@ -6,11 +6,13 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 
+from axc680.cryptic.tools import pipeline as pipeline
 
-def post_list(request):
+
+def home(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     clues = Clue.objects.all()
-    return render(request, 'homepage/post_list.html', {'posts':posts, 'clues':clues})
+    return render(request, 'homepage/home.html', {'posts':posts, 'clues':clues})
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -50,6 +52,11 @@ def clue_edit(request, pk):
         if form.is_valid():
             clue = form.save(commit=False)
             clue.author = request.user
+            
+
+            sol = pipeline.test()
+            clue.solution = sol
+
             clue.save()
             return redirect('clue_detail', pk=clue.pk)
     else:
