@@ -10,7 +10,30 @@
 
         <div class="clue-solutions">
             <h3>Solutions:</h3>
-            <p>{{ clue.solutions }}</p>
+            <p>{{ solutions }}</p>
+
+            
         </div>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Clue Type</th>
+                <th scope="col">Solution</th>
+                <th scope="col">Confidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            {% for solution in solutions %}
+                <tr>
+                    <td>{{ solution }}</td>
+                    <td>{{ solution }}</td>
+                    <td>{{ solution }}</td>
+                </tr>
+            {% endfor %}
+            
+              
+            </tbody>
+          </table> 
     </div>
 {% endblock %}

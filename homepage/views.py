@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Post, Clue
+from .models import Post, Clue, Solution
 from .forms import PostForm, ClueForm
 from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
@@ -52,9 +52,6 @@ def clue_edit(request, pk):
         if form.is_valid():
             clue = form.save(commit=False)
             clue.author = request.user
-            
-            sol = t.test()
-            clue.solutions = sol
 
             clue.save()
             return redirect('clue_detail', pk=clue.pk)
@@ -64,7 +61,14 @@ def clue_edit(request, pk):
 
 def clue_detail(request, pk):
     clue = get_object_or_404(Clue, pk=pk)
-    return render(request, 'homepage/clue_detail.html', {'clue': clue})
+
+    sols = t.test()
+    sol_objs = []
+    for sol in sols:
+        sol_obj = Solution(sol.t, sol.text, sol.score)
+    sol_objs.append(sol_obj)
+
+    return render(request, 'homepage/clue_detail.html', {'clue': clue, 'solutions':sol_objs})
 
 def clue_new(request):
     if request.method == "POST":
@@ -72,9 +76,6 @@ def clue_new(request):
         if form.is_valid():
             clue = form.save(commit=False)
             clue.author = request.user
-
-            sol = t.test()
-            clue.solutions = sol
             clue.save()
             return redirect('clue_detail', pk=clue.pk)
     else:
