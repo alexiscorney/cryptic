@@ -10,7 +10,6 @@
 
         <div class="clue-solutions">
             <h3>Solutions:</h3>
-            <p>{{ solutions }}</p>
 
             
         </div>
@@ -26,9 +25,9 @@
               
             {% for solution in solutions %}
                 <tr>
-                    <td>{{ solution }}</td>
-                    <td>{{ solution }}</td>
-                    <td>{{ solution }}</td>
+                    <td>{{ solution.clue_type }}</td>
+                    <td>{{ solution.solution }}</td>
+                    <td>{{ solution.confidence }}</td>
                 </tr>
             {% endfor %}
             

@@ -66,7 +66,7 @@ def clue_detail(request, pk):
     sol_objs = []
     for sol in sols:
         sol_obj = Solution(sol.t, sol.text, sol.score)
-    sol_objs.append(sol_obj)
+        sol_objs.append(sol_obj)
 
     return render(request, 'homepage/clue_detail.html', {'clue': clue, 'solutions':sol_objs})
 
